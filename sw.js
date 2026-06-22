@@ -1,9 +1,9 @@
 /* ArtGrader service worker — offline app shell.
    Bump CACHE when you change any cached asset. */
-const CACHE = "artgrader-v1";
+const CACHE = "artgrader-v2";
 const ASSETS = [
   "./", "index.html", "styles.css",
-  "analysis.js", "corrections.js", "theory.js", "history.js", "ai.js", "share.js", "app.js",
+  "analysis.js", "corrections.js", "theory.js", "history.js", "share.js", "app.js",
   "manifest.webmanifest", "favicon.svg", "favicon-32.png",
   "icon-192.png", "icon-512.png", "apple-touch-icon.png", "og-image.png",
 ];

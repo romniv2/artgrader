@@ -1,7 +1,7 @@
 /* =====================================================================
    app.js  —  UI wiring.
    Views: landing -> result -> history. Plus tutorial, theory, progress.
-   Depends on: ArtAnalysis, ArtCorrections, ArtTheory, ArtHistory, ArtAI
+   Depends on: ArtAnalysis, ArtCorrections, ArtTheory, ArtHistory, ArtShare
    ===================================================================== */
 (function () {
   "use strict";
@@ -83,8 +83,6 @@
       setOverlay("none");
       $$("#overlayControls .seg-btn").forEach((x) => x.classList.toggle("active", x.dataset.overlay === "none"));
       resetCompare();
-      $("#aiBlock").classList.toggle("hidden", !ArtAI.hasKey());
-      $("#aiOutput").classList.add("muted");
       if (!state.saved) { ArtHistory.add(state.img, state.analysis); state.saved = true; refreshHistoryCount(); }
     });
   }
@@ -416,52 +414,10 @@
   }
 
   // ===================================================================
-  //  MODAL HELPERS + AI
+  //  MODAL HELPERS
   // ===================================================================
   function openModal(m) { m.classList.remove("hidden"); }
   function closeModal(m) { m.classList.add("hidden"); }
-
-  const aiModal = $("#aiModal");
-  $("#aiSettingsBtn").addEventListener("click", () => {
-    $("#apiKeyInput").value = ArtAI.getKey(); $("#modelInput").value = ArtAI.getModel(); openModal(aiModal);
-  });
-  $("#aiModalClose").addEventListener("click", () => closeModal(aiModal));
-  aiModal.addEventListener("click", (e) => { if (e.target === aiModal) closeModal(aiModal); });
-  $("#saveKeyBtn").addEventListener("click", () => {
-    ArtAI.setKey($("#apiKeyInput").value.trim()); ArtAI.setModel($("#modelInput").value.trim());
-    closeModal(aiModal); toast(ArtAI.hasKey() ? "Key saved. AI Mentor unlocked." : "Key cleared.");
-    $("#aiBlock").classList.toggle("hidden", !(ArtAI.hasKey() && state.analysis));
-  });
-  $("#clearKeyBtn").addEventListener("click", () => { ArtAI.setKey(""); $("#apiKeyInput").value = ""; toast("Key cleared."); $("#aiBlock").classList.add("hidden"); });
-
-  $("#askAiBtn").addEventListener("click", async () => {
-    if (!state.analysis) return;
-    if (!ArtAI.hasKey()) return openModal(aiModal);
-    const out = $("#aiOutput"); out.classList.remove("muted");
-    out.innerHTML = `<div class="spinner"></div> Asking the mentor…`;
-    try { out.innerHTML = renderMarkdownish(await ArtAI.critique(state.dataUrl, state.analysis)); }
-    catch (err) { out.innerHTML = `<span class="err">Couldn't reach the model: ${escapeHtml(err.message)}</span>`; }
-  });
-
-  function renderMarkdownish(text) {
-    const lines = escapeHtml(text).split(/\r?\n/); let html = "", inList = false;
-    const headers = ["What's working", "What's holding it back", "The one fix that matters most", "How to do it in Photoshop"];
-    for (let raw of lines) {
-      let line = raw.trim();
-      if (!line) { if (inList) { html += "</ul>"; inList = false; } continue; }
-      line = line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-      const hdr = line.replace(/[:#*]/g, "").trim();
-      if (headers.some((h) => hdr.toLowerCase().startsWith(h.toLowerCase()))) {
-        if (inList) { html += "</ul>"; inList = false; } html += `<h4 class="ai-h">${hdr}</h4>`;
-      } else if (/^[-*•]\s+/.test(line)) {
-        if (!inList) { html += "<ul>"; inList = true; } html += `<li>${line.replace(/^[-*•]\s+/, "")}</li>`;
-      } else { if (inList) { html += "</ul>"; inList = false; } html += `<p>${line}</p>`; }
-    }
-    if (inList) html += "</ul>"; return html;
-  }
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
 
   // ===================================================================
   //  SHARE + FOOTER

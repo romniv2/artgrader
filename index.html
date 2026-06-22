@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ArtGrader — studio critique for your digital paintings</title>
 <meta name="description" content="Upload a digital painting and get an honest read on values, color, lighting and composition — grounded in real art theory. Fix your image or just learn. 100% private, runs in your browser." />
-<meta name="author" content="ArtGrader" />
+<meta name="author" content="Rom Niv" />
 <meta name="theme-color" content="#0d0e14" />
 <link rel="canonical" href="./" />
 
@@ -50,7 +50,6 @@
   <nav class="topbar-actions">
     <button id="tutorialBtn" class="btn ghost">？ How it works</button>
     <button id="historyBtn" class="btn ghost">◫ Progress <span id="historyCount" class="count-pill hidden">0</span></button>
-    <button id="aiSettingsBtn" class="btn ghost" title="Optional AI mentor">✦ AI Mentor</button>
     <button id="newImageBtn" class="btn ghost hidden">↻ New piece</button>
   </nav>
 </header>
@@ -197,11 +196,6 @@
           <button class="btn ghost" id="downloadCardBtn">⬇ Save image</button>
         </div>
       </div>
-
-      <div id="aiBlock" class="ai-block hidden">
-        <div class="ai-head"><span class="ai-badge">✦ AI Mentor</span><button id="askAiBtn" class="btn small">Write me a critique</button></div>
-        <div id="aiOutput" class="ai-output muted">Add an API key in “AI Mentor” to unlock a written, mentor-style critique on top of the measured analysis.</div>
-      </div>
     </div>
   </section>
 
@@ -241,19 +235,6 @@
   </div>
 </div>
 
-<!-- ===================== AI SETTINGS MODAL ===================== -->
-<div id="aiModal" class="modal hidden">
-  <div class="modal-card">
-    <button class="modal-close" id="aiModalClose">×</button>
-    <h2>✦ AI Mentor (optional)</h2>
-    <p class="muted">The measured grade needs nothing. This adds a written, paragraph-style critique from Claude’s vision model. Your key is stored only in this browser (localStorage) and calls go straight from your machine to Anthropic.</p>
-    <label class="field"><span>Anthropic API key</span><input type="password" id="apiKeyInput" placeholder="sk-ant-..." autocomplete="off" /></label>
-    <label class="field"><span>Model</span><input type="text" id="modelInput" value="claude-opus-4-8" /></label>
-    <p class="warn">⚠ For your own local use. Don’t publish the site with your key baked in.</p>
-    <div class="modal-actions"><button class="btn primary" id="saveKeyBtn">Save</button><button class="btn ghost" id="clearKeyBtn">Clear key</button></div>
-  </div>
-</div>
-
 <!-- ===================== HISTORY DETAIL MODAL ===================== -->
 <div id="detailModal" class="modal hidden">
   <div class="modal-card wide">
@@ -275,7 +256,7 @@
       <a class="linkish" id="footSource" href="#" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
-  <p class="foot-fine">Made for artists · vanilla JS, no trackers · works offline · v1.0</p>
+  <p class="foot-fine">Created by <strong>Rom Niv</strong> · made for artists · no trackers · works offline · v1.0</p>
 </footer>
 
 <div id="toast" class="toast hidden"></div>
@@ -285,7 +266,6 @@
 <script src="theory.js"></script>
 <script src="history.js"></script>
 <script src="share.js"></script>
-<script src="ai.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

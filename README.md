@@ -4,8 +4,8 @@ A friendly web app that critiques your digital paintings — values, color, ligh
 composition — and can show you a *corrected version of your own image*, or just teach you
 with words. Built for illustrators working out of Photoshop.
 
-Everything runs **locally in your browser**. Your art never gets uploaded anywhere
-(unless you turn on the optional AI Mentor — see below).
+Everything runs **locally in your browser**. Your art never gets uploaded anywhere — no
+server, no account, no tracking.
 
 It's a **shippable static product**: no build step, no server, no database. It installs as
 an app, works offline, generates a shareable report-card image, and deploys free to any
@@ -72,14 +72,6 @@ New to it? Hit **? How it works** in the header for a quick tour of the purpose 
 - **Composition** — focal mass via Sobel edge energy, rule-of-thirds proximity, left/right
   and top/bottom balance.
 
-## Optional: AI Mentor (Claude vision)
-
-Click **✦ AI Mentor**, paste an Anthropic API key, and you get a written, atelier-style
-critique layered on top of the measured numbers. The key is stored only in your browser
-(localStorage) and calls go directly from your machine to Anthropic.
-
-⚠️ This is for your own local use. Don't publish the site with your key baked in.
-
 ## Honest limitations
 
 - The grade is a **fundamentals coach**, not a taste judge. A deliberately flat, low-contrast,
@@ -100,7 +92,6 @@ critique layered on top of the measured numbers. The key is stored only in your 
 | `theory.js` | art-theory knowledge base (the “why” behind each note) |
 | `history.js` | local progress journal + score-over-time chart |
 | `share.js` | shareable report-card image + native share |
-| `ai.js` | optional Claude vision critique |
 | `app.js` | UI wiring |
 | `sw.js` · `manifest.webmanifest` | offline + installable PWA |
 | `tools/generate_assets.py` | regenerates icons + the social preview image (Pillow) |

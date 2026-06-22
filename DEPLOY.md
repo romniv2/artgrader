@@ -80,8 +80,7 @@ python -m pip install pillow
 python tools/generate_assets.py
 ```
 
-## A note on the optional AI Mentor
+## Privacy
 
-The AI critique is **bring-your-own-key**: each visitor pastes their own Anthropic API key,
-which is stored only in their browser. Never bake your own key into a public deployment —
-it would be visible to everyone and abused. The whole app works fully without it.
+There's no backend and no analytics: every visitor's artwork is analysed entirely in their
+own browser and never uploaded. Nothing to configure, nothing to leak.
