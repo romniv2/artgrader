@@ -7,6 +7,12 @@ with words. Built for illustrators working out of Photoshop.
 Everything runs **locally in your browser**. Your art never gets uploaded anywhere
 (unless you turn on the optional AI Mentor — see below).
 
+It's a **shippable static product**: no build step, no server, no database. It installs as
+an app, works offline, generates a shareable report-card image, and deploys free to any
+static host. **To put it online, see [DEPLOY.md](DEPLOY.md)** (Netlify drop / GitHub Pages /
+Vercel / Cloudflare / itch.io — pick one, ~1 minute). There's also a ready-made
+`artgrader.zip` you can drag onto a host or upload to itch.io.
+
 ## How to open it
 
 **Easiest:** double-click `index.html`. Done.
@@ -41,6 +47,19 @@ then open <http://localhost:5177> in your browser.
    re-read its full critique.
 
 New to it? Hit **? How it works** in the header for a quick tour of the purpose and flow.
+
+## Sharing & shipping
+
+- **Report card** — on any grade, hit **📤 Share report card** to generate a clean 1080×1350
+  PNG (artwork + grades + headline) for Instagram / Discord / ArtStation. Uses the native
+  share sheet where available, otherwise downloads. Past pieces can be shared from their
+  Progress detail too.
+- **Installable PWA** — served over HTTPS, browsers offer **Install app**; it then opens in
+  its own window and **works fully offline** (a service worker caches the app shell).
+- **Social link previews** — sharing the site URL unfurls a branded `og-image.png` card.
+- **Privacy as a feature** — no upload, no account, no analytics, no trackers. Every pixel is
+  analysed locally. That's the honest pitch in the footer.
+- **Deploy anywhere** — see [DEPLOY.md](DEPLOY.md).
 
 ## What the grade actually measures (it's real math, not vibes)
 
@@ -80,7 +99,12 @@ critique layered on top of the measured numbers. The key is stored only in your 
 | `corrections.js` | real pixel-level fixes |
 | `theory.js` | art-theory knowledge base (the “why” behind each note) |
 | `history.js` | local progress journal + score-over-time chart |
+| `share.js` | shareable report-card image + native share |
 | `ai.js` | optional Claude vision critique |
 | `app.js` | UI wiring |
+| `sw.js` · `manifest.webmanifest` | offline + installable PWA |
+| `tools/generate_assets.py` | regenerates icons + the social preview image (Pillow) |
+| `DEPLOY.md` · `netlify.toml` · `vercel.json` · `LICENSE` | shipping kit |
 
-No build step, no dependencies, no `npm install`.
+No build step, no dependencies, no `npm install`. The only optional tooling is Python +
+Pillow, and only if you want to regenerate the brand images.
