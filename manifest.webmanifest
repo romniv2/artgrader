@@ -1,0 +1,16 @@
+{
+  "name": "ArtGrader — studio critique for digital paintings",
+  "short_name": "ArtGrader",
+  "description": "Upload a digital painting and get an honest read on values, color, lighting and composition — grounded in real art theory. Runs entirely in your browser.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0e14",
+  "theme_color": "#0d0e14",
+  "categories": ["art", "education", "graphics", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

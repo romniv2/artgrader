@@ -1,0 +1,20 @@
+# ArtGrader is static — nothing to build, just publish the folder.
+[build]
+  publish = "."
+  command = ""
+
+# long-cache the immutable-ish assets, but always revalidate the SW and HTML
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
